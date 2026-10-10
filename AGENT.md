@@ -4,6 +4,10 @@ This brief expands the website instruction into a concrete UX and implementation
 
 Course pages were reviewed on **10 October 2026**. Linked course requirements are distinguished from project recommendations derived from `docs/ux/`.
 
+**User-selected implementation:** use **Rust + Axum for the backend** and **Svelte + TypeScript for the frontend**, with Vite as the default frontend build tool. The user permits Svelte or SolidJS; Svelte is the recommended choice for this project's forms, checklists, and explanatory views. This is a project judgment, not a claim that SolidJS cannot support them. Prefer an established SolidJS implementation if one is already present and document that choice.
+
+This preference takes precedence over the earlier React implementation recommendation. The course explicitly requires React in its final submission, so an Axum/Svelte implementation is a deliberate deviation, not automatically a compliant submission. Continue the authorized experimental implementation without waiting for instructor approval; record that acceptance of the alternative stack for grading remains unconfirmed. Do not silently switch to React or build a second frontend unless the user requests it.
+
 ## 1. Objective and scope
 
 Develop a functional, responsive interface for this topic:
@@ -36,7 +40,7 @@ Preserve **Dxx = sourced evidence**, **Axx = assumption requiring verification**
 
 Tasks 02 and 03 have substantial local documentation. This does not prove interviews, clinical validation, FigJam transfer, or submission occurred. The persona is hypothetical; only one competitor screenshot is present. Reuse the research while retaining these uncertainties.
 
-The workspace currently contains documentation and Nix environment files, no application source or `package.json`, and is not a Git checkout. Reinspect before implementation. Rust/SurrealDB tools in `flake.nix` do not establish a required application stack.
+At initial inspection, the workspace contained documentation and Nix environment files, no application source or `package.json`, and was not a Git checkout. Reinspect before implementation. Rust tools now support the user's Axum choice; the presence of SurrealDB does not mandate a database.
 
 ## 3. Course workflow and remaining work
 
@@ -78,11 +82,13 @@ For this project, compare a dedicated appointment-change comparison journey with
 
 Prepare an empty protocol and findings table until testing occurs. For this project, observe whether participants find the next action, correct a completion mark, distinguish old/new appointments, and understand that recorded completion is not clinical approval. Report automated checks and expert review separately from participant testing.
 
-### Task 09: final React implementation
+### Task 09: course React workflow and the requested alternative
 
 [Lab 09](https://kurzy.kpi.fei.tuke.sk/ux/labs/09.html) requires the tested **v1.1 prototype as visual and functional input** to Figma Make; text-only generation is insufficient. Select one consistent existing design language for the final version. Transfer required states to editable Figma Design layers/components, export React, and refine the code. Save the generated baseline and later changes separately in a departmental Git repository prefixed `UX-`. Check responsiveness, semantics, labels, keyboard operation, focus, contrast, errors, and both scenarios. Document later regeneration separately and preserve existing work.
 
 If the tested prototype or tool access is missing, record the gap. Continue independent preparation: scenarios, specifications, fixtures, or an implementation plan. If the user separately authorizes early local implementation, label it provisional and identify unmet course prerequisites. Do not describe it as a compliant final artifact.
+
+For the user's implementation, translate the tested views, components, transitions, and design language into Svelte with an Axum API. A Figma React export may serve as a reference artifact, but is not directly the chosen frontend. Preserve genuine export provenance if such an artifact exists; never claim a hand-written Svelte application was exported by Figma Make. Keep UX coverage and accessibility checks while explicitly documenting the framework deviation.
 
 ## 4. Behavior required by the existing conceptual model
 
@@ -149,16 +155,16 @@ Sharing, calendar export, printing, staff dashboards, authentication, and multip
 
 These are defaults, not mandatory course dependencies:
 
-1. Inspect existing code and Figma export first. Preserve its package manager/structure. Without an export, record the missing prerequisite before choosing a provisional scaffold.
+1. Inspect existing code and design artifacts first. Preserve the package manager and reusable assets where appropriate. Record missing course prerequisites without treating them as a prohibition on user-authorized experimental work.
 2. The development scaffold lives in `dev/backend/` (Rust/Axum) and `dev/frontend/` (Svelte, TypeScript, Vite); see [development instructions](dev/README.md). Keep this structure unless there is a concrete reason to change it. Node.js 24 and npm are the initial tooling choice. The user also permits Bun if it demonstrably improves the workflow; document any change, migrate commands and lockfiles together, and avoid competing package-manager lockfiles. A Svelte SPA calling Axum is sufficient; introduce SvelteKit or SSR only for an identified need. Avoid a second backend in the frontend framework. Use SolidJS only with a documented project-specific reason, such as substantial existing code.
-3. Keep views in `src/pages`, reusable elements in `src/components`, and domain transitions separate from rendering. Suggested components: appointment summary, plan status, step list/card, problem form, contact panel.
-4. Model appointment status, change requests, instruction versions, plan validity, steps, history, problems, and reminders separately. Use stable IDs and link reminders to a plan version.
-5. Use fictional local fixtures. Backend/database infrastructure is unnecessary; do not add Rust/SurrealDB solely because its tools are present.
+3. Keep frontend views in `frontend/src/pages`, reusable elements in `frontend/src/components`, and API calls/types in a small client module. Suggested components: appointment summary, plan status, step list/card, problem form, contact panel. Svelte's [declarative components](https://svelte.dev/docs/svelte/overview) and [form bindings](https://svelte.dev/docs/svelte/bind) support the proposed UI; choosing it is a design judgment.
+4. Model appointment status, change requests, instruction versions, plan validity, steps, history, problems, and reminders separately. Use stable IDs and link reminders to a plan version. Axum owns authoritative state transitions and validation; the frontend renders returned state and keeps transient UI/form state. Do not duplicate consequential transition rules in both layers.
+5. Implement a small JSON API for reading the plan, recording/correcting completion, reporting problems, requesting appointment changes, and updating reminder preferences. Keep simulated clinic confirmation, demo-clock changes, and reset actions separate from patient operations. Axum's [shared state support](https://docs.rs/axum/latest/axum/extract/struct.State.html) can hold fictional demo data initially. Document restart/reset behavior; add persistent storage only for a demonstrated requirement. SurrealDB is optional.
 6. Provide deterministic demo states and reset controls for normal preparation, missing confirmation, reported problems, and changes before/after preparation starts. Separate simulation controls from patient actions.
 7. Use a controllable demo clock and explicit date/time handling for Slovak display. Avoid fixed historical appointments inadvertently becoming overdue in every demonstration.
-8. If persisting progress, store only fictional demo data, version it, and handle unavailable/corrupt storage. Reload must not resurrect obsolete reminders.
+8. Read authoritative progress from Axum on reload. If adding persistence, store only fictional demo data and document migration/reset behavior. Reload must not resurrect obsolete reminders. Handle unavailable API, malformed responses, and version conflicts; show success only after the server accepts a mutation. Disable duplicate submission or otherwise make retries safe.
 9. Label simulated clinic events. Never imply a local form contacted a real workplace.
-10. Document actual installation, development, build, and verification commands. Adjust environment tooling only as needed for the frontend.
+10. Document backend/frontend installation, startup, build, and verification commands. Add Node tooling to the development environment as needed. During development proxy `/api` from Vite to Axum; prefer a shared origin for deployment. Document any cross-origin configuration if separate origins are actually used.
 
 ## 7. Acceptance criteria and verification
 
@@ -180,7 +186,7 @@ These checks do not replace real user testing or clinical validation:
 | Keyboard use | Both journeys work without a mouse, with focus, labels, and appropriate dialog focus handling. |
 | Demo honesty | Fictional confirmations and nondelivered reminders cannot resemble real clinical communication. |
 
-Run a production build and relevant type/lint checks when configured. Add focused tests for consequential transitions: appointment confirmation, history preservation, and invalid reminders. Record actual checks/results/limitations. Do not call walkthroughs participant research or claim full accessibility compliance from a few checks.
+Run the frontend production build and Svelte/TypeScript checks, plus Rust formatting, Clippy, and backend tests as configured. Test consequential transitions at the Axum/domain layer: appointment confirmation, history preservation, and invalid reminders. Verify both complete journeys through the actual frontend/API integration, including API failure and retry behavior. Record actual checks/results/limitations. Do not call walkthroughs participant research or claim full accessibility compliance from a few checks.
 
 ## 8. Documentation and submission deliverables
 
@@ -200,6 +206,8 @@ Course deliverables:
 - **Second submission:** FigJam findings/severity and changes, Figma Design/live prototype links, AI declaration. Preserve submitted/tested versions after the deadline; continue on copies. **Ambiguity:** one part refers to paper-prototype testing, while digital criteria and lab 08 refer to digital testing. Confirm expectations with the instructor rather than silently overriding either wording. See [second submission](https://kurzy.kpi.fei.tuke.sk/ux/assignments/bp-2-prototyp.html).
 - **Final submission:** readable Git/video links, React source, README with installation/start instructions, same video link, reflection, AI declaration. Video is at most three minutes and shows both scenarios and responsiveness. Reflect on a wrong initial decision, an unresolved problem, and next iteration. Simulated local functionality is allowed; backend/database and repeated user testing are optional. Exclude `node_modules` and generated development files. See [final submission](https://kurzy.kpi.fei.tuke.sk/ux/assignments/bp-3-html.html).
 
+For the requested experiment, provide Axum/Svelte source and startup instructions for both services instead of presenting it as React source. State the framework deviation in the README and implementation notes. Instructor acceptance must be established before claiming compliance with the final submission. The backend is required by the user even though optional in the course.
+
 The final submission describes visibility using both “public” and “Unlisted”; verify the intended video setting before publication. Participant recordings are separate from the demonstration video and must not be publicly shared.
 
 Follow [course AI rules](https://kurzy.kpi.fei.tuke.sk/ux/ai.html): document actual tools/purposes, verify factual claims, include a real student example of an AI suggestion modified/rejected with a reason. Never invent reflections, quotes, results, exports, commits, or links. Extend `overenie-a-ai.md` with actual work; keep unresolved student actions pending.
@@ -215,6 +223,19 @@ When asked to execute this brief:
 5. Preserve real artifacts/submitted versions. Prepare concrete handoffs for people or unavailable tools while continuing independent work.
 6. Implement complete journeys with state changes and recovery, prioritizing behavior over decoration.
 7. Finish with artifacts, checks actually run, and genuine dependencies. Link local files and actual external artifacts.
+
+### Dedicated commit agent
+
+The user explicitly requests delegation of local Git commits during future implementation. When the runtime exposes sub-agent tools, spawn one agent named `committer` and keep it responsible for local commits. Delegation depends on the hosting environment, not just the model name; see [official multi-agent guidance](https://developers.openai.com/api/docs/guides/responses-multi-agent).
+
+- Before implementation, inspect repository status, existing staged changes, identity, and history. If this project has no repository and is not inside a parent repository, initialize a local repository as part of the authorized implementation workflow. Do not invent Git author identity; request missing identity if Git cannot commit.
+- The main agent implements and verifies a coherent milestone, then sends the committer its exact files or hunks, purpose, and actual validation results. Pause edits to those files until the commit finishes. In a shared checkout, only the committer stages/commits; avoid competing index operations.
+- The committer reviews the scoped diff, runs `git diff --check`, stages explicit files or hunks, inspects the staged diff, and makes a descriptive local commit. Exclude unrelated user edits, secrets, patient data, build outputs, `node_modules`, and Rust `target/`; preserve unrelated pre-existing staged work. Do not use blanket staging when scope is uncertain.
+- Make commits at meaningful milestones, such as backend transitions, frontend journeys, integration, and documentation. Report commit hash, scope, and checks to the main agent. Commit messages must describe actual provenance; label Figma Make generation only when it really occurred.
+- The committer does not change implementation, rewrite history, amend unrelated commits, reset work, or push. The main agent retains responsibility for integration and task completion.
+- If delegation is unavailable, the main agent performs the same local commit workflow and reports the fallback. If filesystem permissions prevent Git writes, use the runtime's normal approval mechanism; delegation cannot bypass permissions.
+
+This section authorizes local commits for the future implementation task, not remote publication or pushing. The current documentation update does not require creating a repository or spawning an agent solely to demonstrate delegation.
 
 **Current request boundary:** this revision explains future work for GPT-6 Astra. The present session does not build the app, contact participants, modify Figma, publish, push, or submit coursework.
 
