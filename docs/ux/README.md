@@ -13,6 +13,11 @@ Rozhranie má sprevádzať pacienta prípravou, upozorniť na chýbajúce kroky 
 | [03-konceptualny-model.md](03-konceptualny-model.md) | Pojmy, vlastnosti, vzťahy, používateľské akcie a správanie pri zmene alebo probléme. |
 | [zdroje.md](zdroje.md) | Zdroje S01–S08 a odkazy na zadania. |
 | [overenie-a-ai.md](overenie-a-ai.md) | Otvorené predpoklady, plán rozhovorov a deklarácia použitia AI. |
+| [04-pribehy-a-scenare.md](04-pribehy-a-scenare.md) | PP01–PP03, bežná príprava, zmena termínu, problém a obnova po chybách. |
+| [05-papierovy-prototyp.md](05-papierovy-prototyp.md) | Návod na ručné kresby a dve alternatívy; skutočné kresby chýbajú. |
+| [06-07-digitalny-prototyp.md](06-07-digitalny-prototyp.md) | Špecifikácia a kontrolný zoznam; Figma artefakty chýbajú. |
+| [08-testovanie.md](08-testovanie.md) | Plán a prázdny protokol pre päť účastníkov; testovanie ešte neprebehlo. |
+| [09-implementacia.md](09-implementacia.md) | Predbežný Axum/Svelte experiment, sledovateľnosť, kontroly a otvorené závislosti. |
 | [diagrams/mapa-domeny.svg](diagrams/mapa-domeny.svg) | Vizuálna mapa domény; zdroj v súbore `.mmd`. |
 | [diagrams/konceptualny-model.svg](diagrams/konceptualny-model.svg) | Vizuálny konceptuálny model; zdroj v súbore `.mmd`. |
 | [assets/nhs-priprava.png](assets/nhs-priprava.png) | Skutočná snímka NHS dodaná používateľom. |
@@ -47,4 +52,10 @@ Zatiaľ bola vykonaná dokumentačná rešerš a analýza verejného obsahu. Roz
 4. Vložte NHS snímku k analýze. Pri ostatných riešeniach sú uvedené konkrétne časti vhodné na ďalšie snímky; tie nie sú súčasťou tohto balíka.
 5. Ku kartám modelu pridajte odkazy na výskumné sekcie cez **Copy link to section** a odkazy zo zoznamu zdrojov.
 
-FigJam projekt nebol vytvorený ani upravený: v tejto relácii nie je dostupné pripojenie k FigJam. Tieto súbory sú lokálne podklady, nie odovzdaná práca v Moodle. Nadväzujúca prvá odovzdávka požaduje aj príbehy, scenáre a ručne nakreslený papierový prototyp; tie patria do ďalších cvičení a nie sú predmetom dvoch odkazov v README.
+FigJam projekt nebol vytvorený ani upravený. Tieto súbory sú lokálne podklady, nie odovzdaná práca v Moodle. Príbehy a scenáre boli doplnené 10. 10. 2026; ručne nakreslený papierový prototyp a skutočné Figma artefakty zostávajú nepriložené.
+
+## Aktualizácia implementácie · 10. 10. 2026
+
+Používateľ autorizoval predbežnú lokálnu implementáciu v `dev/`. Rozhranie Pokojne pokrýva PP01–PP03 a samostatné ukážkové scenáre. Rozhodnutia pokračujú N19–N23; pôvodné D01–D09, A01–A08 a N01–N18 zostali zachované. [Spustenie a testy](../../dev/README.md).
+
+Úlohy 04–08 majú pripravené podklady; nie sú tým automaticky dokončené. Ľudské testovanie, klinická validácia, Figma export, video a odovzdanie neprebehli. Svelte sa líši od kurzom požadovaného Reactu; akceptovanie na hodnotenie zostáva nepotvrdené. Skutočné výsledky automatických kontrol sú v úlohe 09.

@@ -62,3 +62,11 @@ Podľa [pravidiel predmetu](https://kurzy.kpi.fei.tuke.sk/ux/ai.html).
 | Dôvod | Aký zdroj, rozhovor alebo vlastná argumentácia vás k tomu viedli? |
 
 Vhodným predmetom kontroly je napríklad zvolený rozsah kolonoskopie, význam stavov krokov či spôsob potvrdenia zmeny termínu. Uveďte iba rozhodnutie, ktoré ste skutočne vykonali.
+
+## Doplnenie · implementácia 10. 10. 2026
+
+Používateľ výslovne autorizoval implementáciu podľa AGENT.md. Codex prečítal existujúce podklady, skontroloval workspace a oficiálne stránky cvičení 02/03/09 a technickú dokumentáciu Svelte/Axum. Vytvoril pracovné scenáre PP01–PP03, podklady k úlohám 05–08, doménové prechody a JSON API v Rust/Axum, slovenské rozhranie v Svelte/TypeScript, testy a dokumentáciu. Pri organizácii lokálneho vývoja boli použité lokálne pokyny zručnosti Sites; registrácia ani publikovanie na Sites neprebehli.
+
+Bol použitý samostatný agent `committer` na kontrolu presne určených zmien a lokálne Git commity podľa AGENT.md. Hlavný agent implementoval a overoval aplikáciu. Použité overenie: Cargo test/rustfmt/Clippy, Svelte/TypeScript, Vite build, Playwright so skutočným lokálnym API a axe. Browser snímky boli skutočne vytvorené a vizuálne skontrolované. Výsledky a limity sú v [09-implementacia.md](09-implementacia.md).
+
+Nástroje nenahradili účastníkov ani zdravotníka. Fiktívny obsah je označený, nebol vytvorený klinický režim ani sľub reálnej komunikácie. Pracovné dokumenty neobsahujú vymyslené Figma odkazy, rozhovory, výsledky testovania s ľuďmi ani osobnú reflexiu študenta. Povinný skutočný príklad vlastnej úpravy alebo odmietnutia AI musí študent stále doplniť sám.
