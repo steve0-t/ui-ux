@@ -2,6 +2,7 @@
   import type { Step } from '../lib/api'
   import StatusBadge from './StatusBadge.svelte'
   import Icon from './Icon.svelte'
+  import { time } from '../lib/api'
   let { step, index }: { step: Step; index: number } = $props()
 </script>
 
@@ -18,5 +19,8 @@
         >Máte aj záznam o splnení</small
       >{/if}
   </div>
+  {#if step.applicable && !step.needs_verification}
+    <span class="step-time"><Icon name="clock" size={14} />{time(step.due_at)}</span>
+  {/if}
   <Icon name="arrow" size={19} />
 </a>

@@ -4,15 +4,20 @@
   import ContactPanel from '../components/ContactPanel.svelte'
   import StepCard from '../components/StepCard.svelte'
   import Icon from '../components/Icon.svelte'
+  import PreparationIllustration from '../components/PreparationIllustration.svelte'
   let { plan }: { plan: Plan } = $props()
   const next = $derived(plan.steps.find((s) => s.id === plan.next_step_id))
   const allDone = $derived(plan.completed_count === plan.applicable_count)
 </script>
 
-<div class="page-heading">
-  <p class="eyebrow">Krok za krokom k vyšetreniu</p>
-  <h1 tabindex="-1">Vaša príprava, prehľadne.</h1>
-  <p>Všetko potrebné na jednom mieste. Začnite tým, čo je teraz dôležité.</p>
+<div class="page-heading overview-heading">
+  <div class="hero-copy">
+    <p class="eyebrow"><span></span> Krok za krokom k vyšetreniu</p>
+    <h1 tabindex="-1">Vaša príprava,{' '}<br /><span>prehľadne.</span></h1>
+    <p>Všetko potrebné na jednom mieste.<br />Začnite tým, čo je teraz dôležité.</p>
+    <a href="#plan" class="text-link">Pozrieť môj plán prípravy <Icon name="arrow" size={18} /></a>
+  </div>
+  <PreparationIllustration />
 </div>
 <AppointmentSummary {plan} />
 {#if plan.change && !plan.change.acknowledged}<a href="#termin" class="notice notice-link"
@@ -61,7 +66,7 @@
     </section>
     <section class="overview-steps" aria-labelledby="overview-steps">
       <div class="section-title">
-        <h2 id="overview-steps">Váš plán prípravy</h2>
+        <h2 id="overview-steps"><Icon name="list" size={21} /> Váš plán prípravy</h2>
         <a href="#plan" class="text-link">Celý plán <Icon name="arrow" size={17} /></a>
       </div>
       {#each plan.steps.filter((s) => s.applicable).slice(0, 3) as step, index}<StepCard

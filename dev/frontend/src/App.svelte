@@ -120,56 +120,53 @@
   }}>Preskočiť na obsah</a
 >
 <div class="app-shell">
-  <aside class="sidebar">
-    <a href="#prehlad" class="brand" aria-label="Pokojne – prehľad"
-      ><span class="brand-mark"
-        ><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"
-          ><path
-            d="M7 20V10a3 3 0 0 1 3-3h7a6 6 0 0 1 0 12h-4"
-            stroke="currentColor"
-            stroke-width="3.2"
-            stroke-linecap="round"
-          /><path
-            d="m13 14 3 3 5-6"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          /></svg
-        ></span
-      >pokojne<span class="brand-period">.</span></a
-    >
-    <p class="brand-subtitle">Váš sprievodca prípravou</p>
-    <p class="nav-label">MOJE VYŠETRENIE</p>
-    <nav aria-label="Hlavná navigácia">
-      {#each nav as link}<a
-          href={`#${link.id}`}
-          class:active={page === link.id || (page === 'krok' && link.id === 'plan')}
-          aria-current={page === link.id || (page === 'krok' && link.id === 'plan')
-            ? 'page'
-            : undefined}><Icon name={link.icon} /><span>{link.label}</span></a
-        >{/each}
-    </nav>
-    <a href="#problem" class="sidebar-help" class:active={page === 'problem'}
-      ><Icon name="help" /> Mám problém {#if plan?.problems.length}<span class="count"
-          >{plan.problems.length}</span
-        >{/if}</a
-    >
-    <div class="sidebar-footer">
-      <Icon name="shield" />
-      <p>Malé kroky.<br /><strong>Jasnejší ďalší postup.</strong></p>
-      <span>Školský prototyp · 2026</span>
-    </div>
-  </aside>
-  <div class="main-shell">
-    <header class="topbar">
-      <span>Príprava na vyšetrenie</span><span class="demo-badge"
-        ><span></span> Ukážka s fiktívnymi údajmi</span
+  <header class="site-header">
+    <div class="header-main">
+      <a href="#prehlad" class="brand" aria-label="Pokojne – prehľad"
+        ><span class="brand-mark"
+          ><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"
+            ><path
+              d="M7 20V10a3 3 0 0 1 3-3h7a6 6 0 0 1 0 12h-4"
+              stroke="currentColor"
+              stroke-width="3.2"
+              stroke-linecap="round"
+            /><path
+              d="m13 14 3 3 5-6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            /></svg
+          ></span
+        >pokojne<span class="brand-period">.</span></a
       >
-    </header>
+      <span class="brand-subtitle">Váš sprievodca prípravou</span>
+      <span class="demo-badge"><span></span> Ukážka s fiktívnymi údajmi</span>
+    </div>
+    <div class="navigation-bar">
+      <nav aria-label="Hlavná navigácia">
+        {#each nav as link}<a
+            href={`#${link.id}`}
+            class:active={page === link.id || (page === 'krok' && link.id === 'plan')}
+            aria-current={page === link.id || (page === 'krok' && link.id === 'plan')
+              ? 'page'
+              : undefined}><Icon name={link.icon} /><span>{link.label}</span></a
+          >{/each}
+      </nav>
+      <a href="#problem" class="nav-help" class:active={page === 'problem'}
+        ><Icon name="help" /> Mám problém {#if plan?.problems.length}<span class="count"
+            >{plan.problems.length}</span
+          >{/if}</a
+      >
+    </div>
+  </header>
+  <div class="main-shell">
     <main id="main" tabindex="-1">
       <div class="demo-disclaimer">
-        Táto ukážka nenahrádza pokyny vášho pracoviska. Správy ani pripomienky sa neodosielajú.
+        <Icon name="shield" size={16} />
+        <span
+          >Táto ukážka nenahrádza pokyny vášho pracoviska. Správy ani pripomienky sa neodosielajú.</span
+        >
       </div>
       {#if error}<div class="notice error" role="alert" tabindex="-1" bind:this={errorElement}>
           <strong>{error}</strong>{#if plan}<p>
@@ -211,7 +208,9 @@
       {:else}<h1 tabindex="-1">Plán zatiaľ nie je dostupný</h1>
         <p>Skúste načítať aktuálny plán pomocou tlačidla vyššie.</p>{/if}
       <footer class="page-footer">
-        <span>Pokojne · Ukážkový sprievodca</span><a href="#pokyny">Pôvod pokynov a kontakt</a>
+        <span><strong>pokojne.</strong> Malé kroky. Jasnejší ďalší postup.</span>
+        <span>Školský prototyp · 2026</span>
+        <a href="#pokyny">Pôvod pokynov a kontakt</a>
       </footer>
     </main>
   </div>

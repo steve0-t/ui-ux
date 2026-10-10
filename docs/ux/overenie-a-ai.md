@@ -70,3 +70,9 @@ Používateľ výslovne autorizoval implementáciu podľa AGENT.md. Codex preč�
 Bol použitý samostatný agent `committer` na kontrolu presne určených zmien a lokálne Git commity podľa AGENT.md. Hlavný agent implementoval a overoval aplikáciu. Použité overenie: Cargo test/rustfmt/Clippy, Svelte/TypeScript, Vite build, Playwright so skutočným lokálnym API a axe. Browser snímky boli skutočne vytvorené a vizuálne skontrolované. Výsledky a limity sú v [09-implementacia.md](09-implementacia.md).
 
 Nástroje nenahradili účastníkov ani zdravotníka. Fiktívny obsah je označený, nebol vytvorený klinický režim ani sľub reálnej komunikácie. Pracovné dokumenty neobsahujú vymyslené Figma odkazy, rozhovory, výsledky testovania s ľuďmi ani osobnú reflexiu študenta. Povinný skutočný príklad vlastnej úpravy alebo odmietnutia AI musí študent stále doplniť sám.
+
+## Doplnenie · vizuálna úprava 10. 10. 2026
+
+Na žiadosť používateľa Codex upravil rozhranie v `dev/frontend` s vizuálnou inšpiráciou z verejných stránok [Dôvery](https://www.dovera.sk/) a [MetLife Slovensko](https://www.metlife.sk/). Prečítal verejný obsah oboch webov a HTML; farby Dôvery overil v jej verejnom štýle. Vytvoril vodorovnú navigáciu, modrozelenú paletu, úvodnú plochu s vlastnou SVG ilustráciou a upravil karty aj mobilné rozloženie. Backend a klinický obsah neboli zmenené.
+
+Svelte/TypeScript kontrola skončila bez chýb a upozornení; Prettier a produkčný Vite build prešli. Existujúca sada Playwright so skutočným lokálnym Axum API prešla všetkými 20 kontrolami na desktope a mobile vrátane klávesnicových ciest, šírky stránok a axe. Prvý beh odhalil nedostatočný kontrast pomocného textu; farba bola opravená pred úspešným opakovaním. Výsledné snímky oboch rozložení boli vizuálne skontrolované. Ide o automatické overenie a kontrolu vzhľadu, nie o nové testovanie s účastníkmi. Lokálny commit pripravuje agent `committer` podľa AGENT.md.
