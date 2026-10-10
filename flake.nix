@@ -28,22 +28,21 @@
     };
   in {
     devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs;
-        [
-          cargo
-          rustc
-          rustup
-          rustfmt
-          openssl
-          pkg-config
-          websocat
-          surrealdb.packages.${system}.default
-          mkcert
-          clippy
-        ]
-        ++ (with pkgs-unstable; [
-          surrealist
-        ]);
+      packages = with pkgs; [
+        cargo
+        rustc
+        rustup
+        rustfmt
+        openssl
+        pkg-config
+        websocat
+        # surrealdb.packages.${system}.default
+        mkcert
+        clippy
+      ];
+      # ++ (with pkgs-unstable; [
+      #   surrealist
+      # ]);
     };
   };
 }
