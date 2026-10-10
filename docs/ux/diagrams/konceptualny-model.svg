@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1390" viewBox="0 0 1800 1390" role="img" aria-labelledby="title desc">
+  <title id="title">Konceptuálny model prípravy pacienta na odborné vyšetrenie</title>
+  <desc id="desc">Vyšetrenie má termín a pracovisko. Pracovisko poskytuje pokyny. Pokyny a termín určujú plán s krokmi. Ku krokom patria pripomienky, problémy, potrebné veci a sprievod. Každá karta uvádza vlastnosti, akcie a väzbu na výskum.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#466078"/></marker>
+    <style>
+      text { font-family: Arial, sans-serif; fill: #172c43; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 20px; fill: #466078; }
+      .card { fill: #fff; stroke: #95aabd; stroke-width: 2; }
+      .attention { fill: #fff5d6; stroke: #9b7017; stroke-width: 2; }
+      .heading { font-size: 25px; font-weight: 700; }
+      .body { font-size: 20px; }
+      .source { font-size: 18px; fill: #466078; }
+      .edge { fill: none; stroke: #466078; stroke-width: 2.5; marker-end: url(#arrow); }
+      .label { font-size: 18px; fill: #304d67; paint-order: stroke; stroke: #f3f6fa; stroke-width: 8px; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <rect width="1800" height="1390" fill="#f3f6fa"/>
+  <text x="70" y="55" class="title">Konceptuálny model</text>
+  <text x="70" y="89" class="subtitle">Príprava pacienta na odborné vyšetrenie · pohľad pacienta · 7. 10. 2026</text>
+
+  <path class="edge" d="M690 210 H280 V370"/>
+  <text x="375" y="198" class="label">V01 · má termín · D01</text>
+  <path class="edge" d="M1110 210 H1520 V370"/>
+  <text x="1170" y="198" class="label">V01 · koná sa na · D07</text>
+  <path class="edge" d="M490 450 H620 V690 H690"/>
+  <text x="545" y="567" class="label" transform="rotate(-90 545 567)">V03/V09 · ovplyvňuje · N12, A06</text>
+  <path class="edge" d="M1520 530 V610"/>
+  <text x="1538" y="578" class="label">V02 · poskytuje</text>
+  <path class="edge" d="M1310 690 H1110"/>
+  <text x="1143" y="670" class="label">V03 · podklad</text>
+  <path class="edge" d="M900 770 V850"/>
+  <text x="918" y="818" class="label">V04 · obsahuje</text>
+  <path class="edge" d="M690 930 H490"/>
+  <text x="530" y="910" class="label">V05 · pripomína</text>
+  <path class="edge" d="M1110 930 H1310"/>
+  <text x="1140" y="910" class="label">V06 · má problém</text>
+  <path class="edge" d="M1730 450 H1760 V930 H1730"/>
+  <text x="1770" y="680" class="label" transform="rotate(90 1770 680)">V07 · posúdi · D05, A06</text>
+  <path class="edge" d="M760 1010 V1050 H280 V1090"/>
+  <text x="385" y="1040" class="label">V08 · môže vyžadovať · N06</text>
+  <path class="edge" d="M900 1010 V1090"/>
+  <text x="918" y="1060" class="label">V08 · môže vyžadovať</text>
+
+  <g>
+    <rect class="card" x="690" y="130" width="420" height="160" rx="16"/>
+    <text x="715" y="169" class="heading">Vyšetrenie</text>
+    <text x="715" y="202" class="body">Názov, účel, miesto</text>
+    <text x="715" y="234" class="body">Akcia: zobraziť podrobnosti</text>
+    <text x="715" y="265" class="source">D01/D07 → N03</text>
+  </g>
+  <g>
+    <rect class="attention" x="70" y="370" width="420" height="160" rx="16"/>
+    <text x="95" y="409" class="heading">Termín</text>
+    <text x="95" y="442" class="body">Dátum, čas, stav potvrdenia</text>
+    <text x="95" y="474" class="body">Akcia: požiadať o zmenu</text>
+    <text x="95" y="505" class="source">Téma → N12 · postup je A06</text>
+  </g>
+  <g>
+    <rect class="card" x="1310" y="370" width="420" height="160" rx="16"/>
+    <text x="1335" y="409" class="heading">Pracovisko</text>
+    <text x="1335" y="442" class="body">Adresa, kontakt, dostupnosť</text>
+    <text x="1335" y="474" class="body">Akcia: kontaktovať pracovisko</text>
+    <text x="1335" y="505" class="source">D07 → N09 · dostupnosť je A06</text>
+  </g>
+  <g>
+    <rect class="card" x="1310" y="610" width="420" height="160" rx="16"/>
+    <text x="1335" y="649" class="heading">Pokyny pracoviska</text>
+    <text x="1335" y="682" class="body">Pôvod, verzia, platnosť</text>
+    <text x="1335" y="714" class="body">Akcie: prečítať, vyjasniť</text>
+    <text x="1335" y="745" class="source">D01–D03 → N04/N05</text>
+  </g>
+  <g>
+    <rect class="card" x="690" y="610" width="420" height="160" rx="16"/>
+    <text x="715" y="649" class="heading">Plán prípravy</text>
+    <text x="715" y="682" class="body">Aktuálnosť, termín, pokrok</text>
+    <text x="715" y="714" class="body">Akcia: pozrieť aktuálny plán</text>
+    <text x="715" y="745" class="source">D01/D03/D08 → N05/N10</text>
+  </g>
+  <g>
+    <rect class="card" x="690" y="850" width="420" height="160" rx="16"/>
+    <text x="715" y="889" class="heading">Krok prípravy</text>
+    <text x="715" y="922" class="body">Pokyn, čas, stav</text>
+    <text x="715" y="954" class="body">Akcie: označiť, opraviť, hlásiť</text>
+    <text x="715" y="985" class="source">D03/D08 → N07/N10/N13</text>
+  </g>
+  <g>
+    <rect class="card" x="70" y="850" width="420" height="160" rx="16"/>
+    <text x="95" y="889" class="heading">Pripomienka</text>
+    <text x="95" y="922" class="body">Čas, spôsob, zapnutie</text>
+    <text x="95" y="954" class="body">Akcie: nastaviť, vypnúť</text>
+    <text x="95" y="985" class="source">D09 → N11 · možnosti sú A07</text>
+  </g>
+  <g>
+    <rect class="attention" x="1310" y="850" width="420" height="160" rx="16"/>
+    <text x="1335" y="889" class="heading">Problém s prípravou</text>
+    <text x="1335" y="922" class="body">Čo sa stalo, kedy, stav riešenia</text>
+    <text x="1335" y="954" class="body">Akcie: oznámiť, prečítať odpoveď</text>
+    <text x="1335" y="985" class="source">D05 → N07/N08 · postup je A06</text>
+  </g>
+  <g>
+    <rect class="card" x="70" y="1090" width="420" height="160" rx="16"/>
+    <text x="95" y="1129" class="heading">Potrebné veci</text>
+    <text x="95" y="1162" class="body">Zoznam podľa pokynov, stav</text>
+    <text x="95" y="1194" class="body">Akcia: zaznamenať zabezpečenie</text>
+    <text x="95" y="1225" class="source">D01/D04 → N06</text>
+  </g>
+  <g>
+    <rect class="card" x="690" y="1090" width="420" height="160" rx="16"/>
+    <text x="715" y="1129" class="heading">Sprievod</text>
+    <text x="715" y="1162" class="body">Potreba podľa plánu, zabezpečenie</text>
+    <text x="715" y="1194" class="body">Akcia: zaznamenať zabezpečenie</text>
+    <text x="715" y="1225" class="source">D04 → N06 · zdieľanie je A03</text>
+  </g>
+
+  <text x="70" y="1304" class="subtitle">D = dôkaz · N = návrhové rozhodnutie · A = predpoklad na overenie · V = vzťah</text>
+  <text x="70" y="1336" class="subtitle">Označené splnenie neznamená klinické schválenie. Zmena počas prípravy vyžaduje overenie pracoviskom.</text>
+  <text x="70" y="1368" class="source">Úplné vlastnosti, akcie, pravidlá a odkazy: docs/ux/03-konceptualny-model.md a docs/ux/zdroje.md</text>
+</svg>

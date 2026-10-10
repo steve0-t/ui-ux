@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1150" viewBox="0 0 1600 1150" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa domény: príprava pacienta na odborné vyšetrenie</title>
+  <desc id="desc">Pacient sa pripravuje na vyšetrenie s termínom na pracovisku. Pracovisko poskytuje pokyny, ktoré určujú prípravu. Príprava zahŕňa kroky. Sprievod pomáha pacientovi, problém rieši pracovisko a zmena termínu ovplyvňuje prípravu.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#466078"/></marker>
+    <style>
+      text { font-family: Arial, sans-serif; fill: #172c43; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 20px; fill: #466078; }
+      .card { fill: #fff; stroke: #95aabd; stroke-width: 2; }
+      .attention { fill: #fff5d6; stroke: #9b7017; stroke-width: 2; }
+      .heading { font-size: 25px; font-weight: 700; }
+      .body { font-size: 19px; fill: #466078; }
+      .edge { fill: none; stroke: #466078; stroke-width: 2.5; marker-end: url(#arrow); }
+      .label { font-size: 18px; fill: #304d67; paint-order: stroke; stroke: #f3f6fa; stroke-width: 8px; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <rect width="1600" height="1150" fill="#f3f6fa"/>
+  <text x="60" y="55" class="title">Mapa domény</text>
+  <text x="60" y="90" class="subtitle">Príprava pacienta na odborné vyšetrenie · pojmy a vzťahy · 7. 10. 2026</text>
+
+  <path class="edge" d="M360 190 H620"/>
+  <text x="390" y="174" class="label">pripravuje sa na · D01</text>
+  <path class="edge" d="M980 190 H1240"/>
+  <text x="1030" y="174" class="label">má · D01</text>
+  <path class="edge" d="M800 245 V365"/>
+  <text x="820" y="309" class="label">koná sa na · D07</text>
+  <path class="edge" d="M620 420 H360"/>
+  <text x="392" y="404" class="label">poskytuje · D01–D03</text>
+  <path class="edge" d="M180 475 V650"/>
+  <text x="200" y="565" class="label">určujú · D03</text>
+  <path class="edge" d="M360 705 H620"/>
+  <text x="429" y="689" class="label">zahŕňa · D03</text>
+  <path class="edge" d="M800 760 V880"/>
+  <text x="820" y="830" class="label">môžu mať · D05</text>
+  <path class="edge" d="M980 420 H1110 V935 H980"/>
+  <text x="1093" y="600" class="label" transform="rotate(-90 1093 600)">pomáha riešiť · D05</text>
+  <path class="edge" d="M1240 450 H1190 V270 H180 V245"/>
+  <text x="455" y="285" class="label">pomáha pacientovi · D04</text>
+  <path class="edge" d="M1560 705 H1585 V190 H1560"/>
+  <text x="1575" y="560" class="label" transform="rotate(-90 1575 560)">mení termín · téma</text>
+  <path class="edge" d="M1240 730 H1180 V820 H180 V760"/>
+  <text x="324" y="809" class="label">ovplyvňuje prípravu · N12, A06</text>
+  <path class="edge" d="M130 135 V115 H590 V610 H720 V650"/>
+  <text x="573" y="490" class="label" transform="rotate(-90 573 490)">pacient vykonáva kroky · N10</text>
+
+  <g>
+    <rect class="card" x="40" y="135" width="320" height="110" rx="16"/>
+    <text x="65" y="181" class="heading">Pacient</text>
+    <text x="65" y="216" class="body">Pripravuje sa doma</text>
+  </g>
+  <g>
+    <rect class="card" x="620" y="135" width="360" height="110" rx="16"/>
+    <text x="645" y="181" class="heading">Vyšetrenie</text>
+    <text x="645" y="216" class="body">Plánovaná návšteva</text>
+  </g>
+  <g>
+    <rect class="card" x="1240" y="135" width="320" height="110" rx="16"/>
+    <text x="1265" y="181" class="heading">Termín</text>
+    <text x="1265" y="216" class="body">Dátum a čas</text>
+  </g>
+  <g>
+    <rect class="card" x="620" y="365" width="360" height="110" rx="16"/>
+    <text x="645" y="411" class="heading">Pracovisko</text>
+    <text x="645" y="446" class="body">Poskytuje pokyny a kontakt</text>
+  </g>
+  <g>
+    <rect class="card" x="40" y="365" width="320" height="110" rx="16"/>
+    <text x="65" y="411" class="heading">Pokyny pracoviska</text>
+    <text x="65" y="446" class="body">Požiadavky pred návštevou</text>
+  </g>
+  <g>
+    <rect class="card" x="1240" y="395" width="320" height="110" rx="16"/>
+    <text x="1265" y="441" class="heading">Sprievod</text>
+    <text x="1265" y="476" class="body">Pomoc a odvoz podľa pokynov</text>
+  </g>
+  <g>
+    <rect class="card" x="40" y="650" width="320" height="110" rx="16"/>
+    <text x="65" y="696" class="heading">Príprava</text>
+    <text x="65" y="731" class="body">Činnosti pred vyšetrením</text>
+  </g>
+  <g>
+    <rect class="card" x="620" y="650" width="360" height="110" rx="16"/>
+    <text x="645" y="696" class="heading">Kroky prípravy</text>
+    <text x="645" y="731" class="body">Jednotlivé úlohy</text>
+  </g>
+  <g>
+    <rect class="attention" x="1240" y="650" width="320" height="110" rx="16"/>
+    <text x="1265" y="696" class="heading">Zmena termínu</text>
+    <text x="1265" y="731" class="body">Nový čas návštevy · A06</text>
+  </g>
+  <g>
+    <rect class="card" x="620" y="880" width="360" height="110" rx="16"/>
+    <text x="645" y="926" class="heading">Problém</text>
+    <text x="645" y="961" class="body">Nesplnenie alebo neistota</text>
+  </g>
+
+  <text x="60" y="1045" class="subtitle">D = dôkaz · N = návrhové rozhodnutie · A = predpoklad na overenie</text>
+  <text x="60" y="1080" class="subtitle">Pracovná mapa domény. Nezobrazuje poradie obrazoviek ani technický model systému.</text>
+  <text x="60" y="1115" class="body">Význam pojmov a odkazy na zdroje: docs/ux/02-vyskum-ux.md a docs/ux/zdroje.md</text>
+</svg>

@@ -1,0 +1,26 @@
+flowchart TB
+    vysetrenie["Vyšetrenie<br/>Názov, miesto · zobraziť podrobnosti"]
+    termin["Termín<br/>Dátum, čas, stav · požiadať o zmenu"]
+    pracovisko["Pracovisko<br/>Adresa, dostupnosť · kontaktovať"]
+    pokyny["Pokyny pracoviska<br/>Pôvod, verzia · prečítať, vyjasniť"]
+    plan["Plán prípravy<br/>Platnosť, pokrok · pozrieť aktuálny plán"]
+    krok["Krok prípravy<br/>Pokyn, čas, stav · splniť, opraviť označenie"]
+    pripomienka["Pripomienka<br/>Čas, spôsob · nastaviť, vypnúť"]
+    problem["Problém s prípravou<br/>Opis, stav · oznámiť, prečítať odpoveď"]
+    veci["Potrebné veci<br/>Zoznam, stav · zaznamenať zabezpečenie"]
+    sprievod["Sprievod<br/>Potreba, stav · zaznamenať zabezpečenie"]
+
+    vysetrenie -->|V01: má · D01| termin
+    vysetrenie -->|V01: koná sa na · D07| pracovisko
+    pracovisko -->|V02: poskytuje · D01–D03| pokyny
+    pokyny -->|V03: sú podkladom · N05| plan
+    termin -->|V03/V09: časový kontext · N12, A06| plan
+    plan -->|V04: obsahuje · N10| krok
+    krok -->|V05: pripomína · N11| pripomienka
+    krok -->|V06: môže mať · N07| problem
+    pracovisko -->|V07: posúdi · D05, A06| problem
+    krok -->|V08: môže vyžadovať · N06| veci
+    krok -->|V08: môže vyžadovať · N06| sprievod
+
+    classDef caution fill:#fff5d6,stroke:#9b7017,color:#172c43;
+    class termin,problem caution;

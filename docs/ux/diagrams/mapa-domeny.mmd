@@ -1,0 +1,27 @@
+flowchart LR
+    pacient[Pacient]
+    vysetrenie[Vyšetrenie]
+    termin[Termín]
+    pracovisko[Pracovisko]
+    pokyny[Pokyny pracoviska]
+    priprava[Príprava]
+    kroky[Kroky prípravy]
+    problem[Problém]
+    zmena[Zmena termínu]
+    sprievod[Sprievod]
+
+    pacient -->|pripravuje sa na · D01| vysetrenie
+    vysetrenie -->|má · D01| termin
+    vysetrenie -->|koná sa na · D07| pracovisko
+    pracovisko -->|poskytuje · D01–D03| pokyny
+    pokyny -->|určujú · D03| priprava
+    priprava -->|zahŕňa · D03| kroky
+    pacient -->|vykonáva · N10| kroky
+    kroky -->|môžu mať · D05| problem
+    pracovisko -->|pomáha riešiť · D05| problem
+    sprievod -->|pomáha · D04| pacient
+    zmena -->|mení · téma| termin
+    zmena -->|ovplyvňuje · N12, A06| priprava
+
+    classDef proposal fill:#fff5d6,stroke:#9b7017,color:#172c43;
+    class zmena proposal;
