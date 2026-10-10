@@ -150,7 +150,7 @@ Sharing, calendar export, printing, staff dashboards, authentication, and multip
 These are defaults, not mandatory course dependencies:
 
 1. Inspect existing code and Figma export first. Preserve its package manager/structure. Without an export, record the missing prerequisite before choosing a provisional scaffold.
-2. Use React, HTML, and CSS. TypeScript and Vite are reasonable for an authorized new scaffold; neither is a stated course requirement.
+2. The development scaffold lives in `dev/backend/` (Rust/Axum) and `dev/frontend/` (Svelte, TypeScript, Vite); see [development instructions](dev/README.md). Keep this structure unless there is a concrete reason to change it. Node.js 24 and npm are the initial tooling choice. The user also permits Bun if it demonstrably improves the workflow; document any change, migrate commands and lockfiles together, and avoid competing package-manager lockfiles. A Svelte SPA calling Axum is sufficient; introduce SvelteKit or SSR only for an identified need. Avoid a second backend in the frontend framework. Use SolidJS only with a documented project-specific reason, such as substantial existing code.
 3. Keep views in `src/pages`, reusable elements in `src/components`, and domain transitions separate from rendering. Suggested components: appointment summary, plan status, step list/card, problem form, contact panel.
 4. Model appointment status, change requests, instruction versions, plan validity, steps, history, problems, and reminders separately. Use stable IDs and link reminders to a plan version.
 5. Use fictional local fixtures. Backend/database infrastructure is unnecessary; do not add Rust/SurrealDB solely because its tools are present.

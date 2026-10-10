@@ -6,4 +6,6 @@ topic: `Príprava pacienta na odborné vyšetrenie. Rozhranie prevedie pacienta 
 
 ## Vypracované podklady
 
+[Vývojové prostredie Axum + Svelte](dev/README.md) – samostatný backend a frontend v priečinku `dev/`, s návodom na spustenie a overenie.
+
 [Výskum UX a konceptuálny model](docs/ux/README.md) – slovenské podklady k cvičeniam 2 a 3: vymedzenie problému, cieľoví používatelia, zdroje a závery výskumu, analýza existujúcich riešení, mapa domény a konceptuálny model so SVG diagramami.

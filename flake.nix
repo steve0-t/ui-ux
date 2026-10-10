@@ -1,5 +1,5 @@
 {
-  description = "Chat app env";
+  description = "Patient preparation app: Axum and Svelte development environment";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-26.05";
@@ -31,7 +31,6 @@
       packages = with pkgs; [
         cargo
         rustc
-        rustup
         rustfmt
         openssl
         pkg-config
@@ -39,6 +38,9 @@
         # surrealdb.packages.${system}.default
         mkcert
         clippy
+        nodejs_24
+        # Keep rustup's proxy binaries after the matching Nix tools.
+        rustup
       ];
       # ++ (with pkgs-unstable; [
       #   surrealist
