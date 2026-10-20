@@ -58,6 +58,14 @@ Použité prostredie browser kontrol: Chromium 149, desktop 1440 × 1100 a emul�
 
 Pozorovania nie sú testovaním s účastníkmi. Žiadna klinická validácia ani úplný audit WCAG neprebehli. Browser testy používajú Chromium a mobilnú emuláciu, nie reálne iOS/Safari zariadenie.
 
+## Preklady · 20. 10. 2026
+
+Na žiadosť používateľa boli doplnené angličtina a nemčina; predvolená zostáva slovenčina. Prepínač v hlavičke mení texty, prístupné názvy, metadáta, stavy, známe chyby API, ukážkové pokyny a dátumy bez straty rozpracovaných formulárov. Jazyk sa ukladá iba v prehliadači; časové pásmo zostáva Europe/Bratislava. Vlastný text problémov a dôvodov sa neprekladá. Backend naďalej vlastní celý stav a jeho prechody; prepnutie jazyka nemení revíziu plánu.
+
+Reaktívny preklad je v `dev/frontend/src/lib/i18n.ts`, katalógy v `src/lib/messages/`. Slovenský zdrojový text funguje ako kľúč aj náhradný text; pri zmene známeho textu API treba upraviť zodpovedajúci katalóg. Nepribudla externá prekladová služba ani nová závislosť. Preklady nie sú profesionálne alebo klinicky validované.
+
+Po úprave prešli `npm run check` (0 chýb a upozornení), `npm run format:check` a produkčný build. Rust formátovanie, Clippy a všetkých 7 backendových testov prešli. Posledný úplný beh Playwright s Chromium 155 a skutočným Axum API prešiel **28/28 prípadmi** na desktope a mobile: pôvodné cesty, oba nové jazyky, zachovanie vstupov, uložená voľba, nedostupné úložisko, jazyk chýb spojenia aj skutočného konfliktu revízie, dátumy a axe. Nové overenie klikateľnosti všetkých navigačných položiek pri šírkach 768 a 1024 px najprv odhalilo prekrytie dlhších textov tlačidlom pomoci; rozloženie bolo opravené pred úplným úspešným behom. Anglické a nemecké snímky pre tablet vznikli v testoch; nemecké snímky oboch šírok boli otvorené a vizuálne skontrolované.
+
 ## Zostávajúce ľudské a kurzové závislosti
 
 Skutočné kresby a fotografie; FigJam a Figma artefakty v predpísanom systéme; päť účastníkov a súhlasy; skutočné pozorovania/zmeny a testovaný v1.1; schválenie alternatívneho stacku; lokálne pracovisko a klinické pokyny; osobná reflexia študenta; oddelené nahrávky testovania a prezentačné video; reálny školský Git/video odkaz a odovzdanie. Nebol vykonaný push, publikovanie, kontaktovanie účastníkov ani odovzdanie.

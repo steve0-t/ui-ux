@@ -2,7 +2,7 @@
 
 Funkčný lokálny školský prototyp pre dospelého pacienta, ktorý sa doma pripravuje na plánovanú ambulantnú kolonoskopiu. Ukáže ďalší krok, zaznamená splnenie a jeho opravu, rozlíši chýbajúce potvrdenie od oznámeného problému a reaguje na zmenu termínu.
 
-**Rust + Axum** poskytuje autoritatívny plán a overuje zmeny. **Svelte + TypeScript + Vite** zobrazuje slovenské rozhranie. Údaje, pracovisko, organizačné časy a potvrdenia sú výlučne fiktívne. Aplikácia neposiela správy ani pripomienky a neobsahuje klinické dávkovanie alebo časový režim prípravkov.
+**Rust + Axum** poskytuje autoritatívny plán a overuje zmeny. **Svelte + TypeScript + Vite** zobrazuje rozhranie v slovenčine, angličtine a nemčine. Jazyk sa vyberá v hlavičke a prehliadač si ho pamätá. Údaje, pracovisko, organizačné časy a potvrdenia sú výlučne fiktívne. Aplikácia neposiela správy ani pripomienky a neobsahuje klinické dávkovanie alebo časový režim prípravkov.
 
 ## Spustenie
 

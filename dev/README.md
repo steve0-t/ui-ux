@@ -26,6 +26,7 @@ Produkčný build možno lokálne prezrieť cez `npm run build` a `npm run previ
 ## Model a ukážkové dáta
 
 - Axum vlastní termín, požiadavku, verzie pokynov, platnosť plánu, kroky, históriu, problémy, pripomienky a revíziu celého stavu. Prehliadač vlastní navigáciu a rozpracované formuláre.
+- Jazyk rozhrania (slovenčina, angličtina, nemčina) sa mení v hlavičke bez obnovenia stránky alebo straty rozpracovaných polí. Predvolená je slovenčina; voľba sa ukladá v `localStorage` pod `pokojne-language`. Pri nedostupnom úložisku prepínanie funguje pre aktuálnu stránku. Jazyk nemení zdieľaný stav Axum. Dátumy používajú zvolený jazyk, časové pásmo zostáva Europe/Bratislava.
 - Stav je v pamäti jedného procesu a je spoločný pre všetky otvorené karty. Obnovenie stránky ho načíta z API. Reštart servera alebo explicitný reset obnoví fiktívne dáta; žiadne migrácie ani databáza nie sú potrebné.
 - Ukážkové hodiny začínajú 12. 10. 2026 o 07:00 UTC (09:00 Europe/Bratislava) a samy neplynú. Deň posúva iba simulátor. V API sú RFC 3339 časy; zobrazenie vždy používa Europe/Bratislava, bez ohľadu na časové pásmo prehliadača. Formulár problému odmietne neexistujúci alebo nejednoznačný čas pri prechode letného času.
 - Scenáre `normal`, `missing`, `problem`, `change_before`, `change_during` sa dajú obnoviť cez oddelený panel „Ovládanie ukážky“. Simulácia nového termínu posúva čas o sedem 24-hodinových dní; nie je to skutočná rezervácia.
@@ -99,5 +100,7 @@ npm run test:e2e
 Možno dodať aj absolútnu cestu k nainštalovanému Chromium. Táto premenná mení len browser testy. Snímky a traces sa ukladajú do ignorovaného `frontend/test-results/`; po každom behu sa nahradia. Testy potrebujú oprávnenie spustiť browser a počúvať/komunikovať na localhost.
 
 Fonty Manrope a DM Sans (SIL Open Font License, licencie v balíkoch Fontsource) sa obsluhujú lokálne z buildu. Produkt nevyžaduje Google Fonts ani externé obrázky. Ikony sú vlastné malé SVG komponenty. Formátovanie: `npm run format`.
+
+Preklady sú v `frontend/src/lib/messages/`, reaktívny výber jazyka a interpolácia `{name}` v `frontend/src/lib/i18n.ts`. Pôvodný slovenský text je kľúč aj náhradný text. Pri zmene známych textov API treba upraviť aj `messages/domain.ts`; backend naďalej poskytuje pôvodné údaje. Vlastné opisy problémov a dôvody žiadostí sa neprekladajú, vrátane vzorového opisu v scenári `problem`. Testy `languages.spec.ts` overujú oba nové jazyky, zachovanie vstupu, skutočný konflikt API, obnovu po chybe, uloženú voľbu a nedostupné úložisko.
 
 Skutočné výsledky a limity kontrol: [implementačné poznámky](../docs/ux/09-implementacia.md). Automatické testy nie sú používateľským výskumom, klinickou validáciou ani úplným auditom prístupnosti.

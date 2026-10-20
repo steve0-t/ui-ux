@@ -2,6 +2,7 @@
   import { untrack } from 'svelte'
   import type { Plan, Mutate } from '../lib/api'
   import { dateTime } from '../lib/api'
+  import { t, locale } from '../lib/i18n'
   let { plan, busy, mutate }: { plan: Plan; busy: boolean; mutate: Mutate } = $props()
   let enabled = $state(untrack(() => plan.preferences.enabled))
   let channel = $state(untrack(() => plan.preferences.channel))
@@ -9,16 +10,17 @@
 </script>
 
 <div class="page-heading">
-  <p class="eyebrow">Podľa vašich potrieb</p>
-  <h1 tabindex="-1">Pripomienky</h1>
-  <p>Pripomienky sú dobrovoľné. Svoje nastavenie môžete kedykoľvek zmeniť.</p>
+  <p class="eyebrow">{$t('Podľa vašich potrieb')}</p>
+  <h1 tabindex="-1">{$t('Pripomienky')}</h1>
+  <p>{$t('Pripomienky sú dobrovoľné. Svoje nastavenie môžete kedykoľvek zmeniť.')}</p>
 </div>
 <div class="reading-width stack">
   <section class="surface detail-card">
-    <h2>Nastavenie pripomienok</h2>
+    <h2>{$t('Nastavenie pripomienok')}</h2>
     <p class="notice">
-      Ukladá sa iba ukážkové nastavenie. Žiadne SMS ani e-maily sa neposielajú a kontaktné údaje
-      nezbierame.
+      {$t(
+        'Ukladá sa iba ukážkové nastavenie. Žiadne SMS ani e-maily sa neposielajú a kontaktné údaje nezbierame.',
+      )}
     </p>
     <form
       onsubmit={(e) => {
@@ -30,43 +32,51 @@
       }}
     >
       <label class="checkbox-label"
-        ><input type="checkbox" bind:checked={enabled} /> Chcem pripomienky k plánu</label
+        ><input type="checkbox" bind:checked={enabled} /> {$t('Chcem pripomienky k plánu')}</label
       >
-      <label for="reminder-channel">Spôsob pripomenutia</label><select
+      <label for="reminder-channel">{$t('Spôsob pripomenutia')}</label><select
         id="reminder-channel"
         bind:value={channel}
         disabled={!enabled}
-        ><option value="email">E-mail · ukážka</option><option value="sms">SMS · ukážka</option
+        ><option value="email">{$t('E-mail · ukážka')}</option><option value="sms"
+          >{$t('SMS · ukážka')}</option
         ></select
       >
-      <label for="reminder-time">Predstih pred organizačným krokom</label><select
+      <label for="reminder-time">{$t('Predstih pred organizačným krokom')}</label><select
         id="reminder-time"
         bind:value={minutes}
         disabled={!enabled}
-        ><option value={30}>30 minút</option><option value={60}>1 hodina</option><option
-          value={1440}>1 deň</option
-        ></select
+        ><option value={30}>{$t('30 minút')}</option><option value={60}>{$t('1 hodina')}</option
+        ><option value={1440}>{$t('1 deň')}</option></select
       >
-      <button class="spaced" disabled={busy}>Uložiť nastavenie</button>
+      <button class="spaced" disabled={busy}>{$t('Uložiť nastavenie')}</button>
     </form>
-    <p class="small">Uložené nastavenie: {plan.preferences.enabled ? 'zapnuté' : 'vypnuté'}.</p>
+    <p class="small">
+      {$t('Uložené nastavenie: {state}.', {
+        state: $t(plan.preferences.enabled ? 'zapnuté' : 'vypnuté'),
+      })}
+    </p>
   </section>
   <section class="surface detail-card">
-    <h2>Pripomienky v aktuálnom pláne</h2>
+    <h2>{$t('Pripomienky v aktuálnom pláne')}</h2>
     {#if plan.validity !== 'current'}<p class="notice">
-        Staré pripomienky sú neaktívne. Nové môžu vzniknúť až po potvrdení aktuálneho plánu.
+        {$t('Staré pripomienky sú neaktívne. Nové môžu vzniknúť až po potvrdení aktuálneho plánu.')}
       </p>{/if}
     {#each plan.reminders.filter((r) => r.active) as reminder}<p>
-        <strong>{plan.steps.find((s) => s.id === reminder.step_id)?.title}</strong><br />{dateTime(
-          reminder.at,
-        )} · plán v{reminder.plan_version} · bez odosielania
+        <strong>{$t(plan.steps.find((s) => s.id === reminder.step_id)?.title ?? '')}</strong><br
+        />{$t('{time} · plán v{version} · bez odosielania', {
+          time: dateTime(reminder.at, $locale),
+          version: reminder.plan_version,
+        })}
       </p>{:else}<p>
-        Nie sú tu aktívne pripomienky. Vznikajú iba pre budúce, nepotvrdené kroky aktuálneho plánu
-        so zapnutým nastavením.
+        {$t(
+          'Nie sú tu aktívne pripomienky. Vznikajú iba pre budúce, nepotvrdené kroky aktuálneho plánu so zapnutým nastavením.',
+        )}
       </p>{/each}
     <p class="small">
-      Externý kalendár nie je pripojený. Ak ste si pridali vlastné upozornenia inde, pri zmene
-      termínu ich skontrolujte sami.
+      {$t(
+        'Externý kalendár nie je pripojený. Ak ste si pridali vlastné upozornenia inde, pri zmene termínu ich skontrolujte sami.',
+      )}
     </p>
   </section>
 </div>

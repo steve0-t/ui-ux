@@ -1,3 +1,6 @@
+import { get } from 'svelte/store'
+import { locale, type Locale } from './i18n'
+
 export type Status =
   'planned' | 'due' | 'completed' | 'unconfirmed' | 'problem' | 'verify' | 'not_applicable'
 export interface Appointment {
@@ -199,8 +202,9 @@ export const statusLabels: Record<Status, string> = {
   verify: 'Treba overiť',
   not_applicable: 'Netýka sa vás',
 }
-export const dateTime = (value: string) =>
-  new Intl.DateTimeFormat('sk-SK', {
+const dateLocales: Record<Locale, string> = { sk: 'sk-SK', en: 'en-GB', de: 'de-DE' }
+export const dateTime = (value: string, language: Locale = get(locale)) =>
+  new Intl.DateTimeFormat(dateLocales[language], {
     timeZone: 'Europe/Bratislava',
     day: 'numeric',
     month: 'long',
@@ -208,15 +212,15 @@ export const dateTime = (value: string) =>
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(value))
-export const day = (value: string) =>
-  new Intl.DateTimeFormat('sk-SK', {
+export const day = (value: string, language: Locale = get(locale)) =>
+  new Intl.DateTimeFormat(dateLocales[language], {
     timeZone: 'Europe/Bratislava',
     weekday: 'long',
     day: 'numeric',
     month: 'long',
   }).format(new Date(value))
-export const time = (value: string) =>
-  new Intl.DateTimeFormat('sk-SK', {
+export const time = (value: string, language: Locale = get(locale)) =>
+  new Intl.DateTimeFormat(dateLocales[language], {
     timeZone: 'Europe/Bratislava',
     hour: '2-digit',
     minute: '2-digit',

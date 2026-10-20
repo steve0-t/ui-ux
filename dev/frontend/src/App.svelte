@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
   import { ApiError, fetchPlan, type Plan, type PatientAction, type DemoAction } from './lib/api'
+  import { languages, locale, setLocale, t } from './lib/i18n'
   import Icon from './components/Icon.svelte'
   import DemoPanel from './components/DemoPanel.svelte'
   import Overview from './pages/Overview.svelte'
@@ -104,11 +105,15 @@
 
 <svelte:head
   ><title
-    >{nav.find((n) => n.id === page)?.label ??
-      (page === 'problem' ? 'Mám problém' : 'Krok prípravy')} · Pokojne</title
+    >{$t(
+      nav.find((n) => n.id === page)?.label ??
+        (page === 'problem' ? 'Mám problém' : 'Krok prípravy'),
+    )} · Pokojne</title
   ><meta
     name="description"
-    content="Ukážkový sprievodca prípravou na vyšetrenie. Plán, záznamy krokov a pomoc pri zmene termínu."
+    content={$t(
+      'Ukážkový sprievodca prípravou na vyšetrenie. Plán, záznamy krokov a pomoc pri zmene termínu.',
+    )}
   /></svelte:head
 >
 <a
@@ -117,12 +122,12 @@
   onclick={(e) => {
     e.preventDefault()
     document.getElementById('main')?.focus()
-  }}>Preskočiť na obsah</a
+  }}>{$t('Preskočiť na obsah')}</a
 >
 <div class="app-shell">
   <header class="site-header">
     <div class="header-main">
-      <a href="#prehlad" class="brand" aria-label="Pokojne – prehľad"
+      <a href="#prehlad" class="brand" aria-label={$t('Pokojne – prehľad')}
         ><span class="brand-mark"
           ><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"
             ><path
@@ -140,23 +145,35 @@
           ></span
         >pokojne<span class="brand-period">.</span></a
       >
-      <span class="brand-subtitle">Váš sprievodca prípravou</span>
-      <span class="demo-badge"><span></span> Ukážka s fiktívnymi údajmi</span>
+      <span class="brand-subtitle">{$t('Váš sprievodca prípravou')}</span>
+      <span class="demo-badge"><span></span> {$t('Ukážka s fiktívnymi údajmi')}</span>
+      <label class="language-switcher" for="site-language">
+        <span>{$t('Jazyk')}</span>
+        <select
+          id="site-language"
+          value={$locale}
+          onchange={(event) => setLocale(event.currentTarget.value)}
+        >
+          {#each languages as language}<option value={language.code} lang={language.code}
+              >{language.name}</option
+            >{/each}
+        </select>
+      </label>
     </div>
     <div class="navigation-bar">
-      <nav aria-label="Hlavná navigácia">
+      <nav aria-label={$t('Hlavná navigácia')}>
         {#each nav as link}<a
             href={`#${link.id}`}
             class:active={page === link.id || (page === 'krok' && link.id === 'plan')}
             aria-current={page === link.id || (page === 'krok' && link.id === 'plan')
               ? 'page'
-              : undefined}><Icon name={link.icon} /><span>{link.label}</span></a
+              : undefined}><Icon name={link.icon} /><span>{$t(link.label)}</span></a
           >{/each}
       </nav>
       <a href="#problem" class="nav-help" class:active={page === 'problem'}
-        ><Icon name="help" /> Mám problém {#if plan?.problems.length}<span class="count"
-            >{plan.problems.length}</span
-          >{/if}</a
+        ><Icon name="help" />
+        {$t('Mám problém')}
+        {#if plan?.problems.length}<span class="count">{plan.problems.length}</span>{/if}</a
       >
     </div>
   </header>
@@ -165,18 +182,22 @@
       <div class="demo-disclaimer">
         <Icon name="shield" size={16} />
         <span
-          >Táto ukážka nenahrádza pokyny vášho pracoviska. Správy ani pripomienky sa neodosielajú.</span
+          >{$t(
+            'Táto ukážka nenahrádza pokyny vášho pracoviska. Správy ani pripomienky sa neodosielajú.',
+          )}</span
         >
       </div>
       {#if error}<div class="notice error" role="alert" tabindex="-1" bind:this={errorElement}>
-          <strong>{error}</strong>{#if plan}<p>
-              Zobrazený plán je posledná prijatá verzia. Rozpracované polia zostávajú zachované.
+          <strong>{$t(error)}</strong>{#if plan}<p>
+              {$t(
+                'Zobrazený plán je posledná prijatá verzia. Rozpracované polia zostávajú zachované.',
+              )}
             </p>{/if}<button class="secondary" disabled={busy} onclick={reload}
-            >Načítať aktuálny plán</button
+            >{$t('Načítať aktuálny plán')}</button
           >
         </div>{/if}
       <div class="save-status" role="status" aria-live="polite">
-        {busy ? 'Načítavam alebo ukladám údaje…' : message}
+        {$t(busy ? 'Načítavam alebo ukladám údaje…' : message)}
       </div>
       {#if plan}
         {#if page === 'prehlad'}<Overview {plan} />
@@ -197,20 +218,20 @@
         {:else if page === 'pokyny'}<Instructions {plan} />
         {:else if page === 'pripomienky'}<Reminders {plan} busy={busy || needsReload} {mutate} />
         {:else}<div class="page-heading">
-            <h1 tabindex="-1">Táto stránka sa nenašla</h1>
-            <a href="#prehlad">Späť na prehľad</a>
+            <h1 tabindex="-1">{$t('Táto stránka sa nenašla')}</h1>
+            <a href="#prehlad">{$t('Späť na prehľad')}</a>
           </div>{/if}
         <DemoPanel {plan} busy={busy || needsReload} {simulate} />
       {:else if !error}<div class="loading surface">
-          <h1 tabindex="-1">Načítavam váš plán…</h1>
-          <p>O chvíľu uvidíte termín a kroky prípravy.</p>
+          <h1 tabindex="-1">{$t('Načítavam váš plán…')}</h1>
+          <p>{$t('O chvíľu uvidíte termín a kroky prípravy.')}</p>
         </div>
-      {:else}<h1 tabindex="-1">Plán zatiaľ nie je dostupný</h1>
-        <p>Skúste načítať aktuálny plán pomocou tlačidla vyššie.</p>{/if}
+      {:else}<h1 tabindex="-1">{$t('Plán zatiaľ nie je dostupný')}</h1>
+        <p>{$t('Skúste načítať aktuálny plán pomocou tlačidla vyššie.')}</p>{/if}
       <footer class="page-footer">
-        <span><strong>pokojne.</strong> Malé kroky. Jasnejší ďalší postup.</span>
-        <span>Školský prototyp · 2026</span>
-        <a href="#pokyny">Pôvod pokynov a kontakt</a>
+        <span><strong>pokojne.</strong> {$t('Malé kroky. Jasnejší ďalší postup.')}</span>
+        <span>{$t('Školský prototyp · 2026')}</span>
+        <a href="#pokyny">{$t('Pôvod pokynov a kontakt')}</a>
       </footer>
     </main>
   </div>
